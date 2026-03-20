@@ -2,6 +2,8 @@
 
 A Chrome extension that replaces your new tab page with a random Mandarin Chinese character. Each new tab displays the character, pinyin, phonetic pronunciation, and English meaning.
 
+![Zhongwen screenshot](screenshot.jpg)
+
 ## Features
 
 - Random character on every new tab
