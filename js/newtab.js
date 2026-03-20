@@ -2,6 +2,10 @@
   const CATEGORIES = [
     { key: 'hsk1', file: 'data/hsk1.json', alwaysOn: true },
     { key: 'hsk2', file: 'data/hsk2.json', alwaysOn: false },
+    { key: 'hsk3', file: 'data/hsk3.json', alwaysOn: false },
+    { key: 'hsk4', file: 'data/hsk4.json', alwaysOn: false },
+    { key: 'hsk5', file: 'data/hsk5.json', alwaysOn: false },
+    { key: 'hsk6', file: 'data/hsk6.json', alwaysOn: false },
     { key: 'internet', file: 'data/internet.json', alwaysOn: false },
     { key: 'software', file: 'data/software.json', alwaysOn: false },
   ];
@@ -42,6 +46,10 @@
   async function loadPrefs() {
     const defaults = {
       hsk2: false,
+      hsk3: false,
+      hsk4: false,
+      hsk5: false,
+      hsk6: false,
       internet: false,
       software: false,
       unsplashKey: '',
@@ -170,6 +178,10 @@
   // Checkbox handlers
   const checkboxes = {
     hsk2: document.getElementById('opt-hsk2'),
+    hsk3: document.getElementById('opt-hsk3'),
+    hsk4: document.getElementById('opt-hsk4'),
+    hsk5: document.getElementById('opt-hsk5'),
+    hsk6: document.getElementById('opt-hsk6'),
     internet: document.getElementById('opt-internet'),
     software: document.getElementById('opt-software'),
   };
