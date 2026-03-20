@@ -2,9 +2,9 @@
   "manifest_version": 3,
   "name": "Zhongwen",
   "version": "1.0.0",
-  "description": "Learn Mandarin Chinese, one new tab at a time.",
+  "description": "Learn Mandarin Chinese, one new tab at a time. Displays a random character with pinyin, phonetics, and English meaning on every new tab.",
   "permissions": ["storage"],
-  "host_permissions": ["https://api.unsplash.com/*", "https://images.unsplash.com/*"],
+  "optional_host_permissions": ["https://api.unsplash.com/*", "https://images.unsplash.com/*"],
   "chrome_url_overrides": {
     "newtab": "newtab.html"
   },

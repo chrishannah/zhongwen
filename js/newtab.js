@@ -88,6 +88,25 @@
     return arr[Math.floor(Math.random() * arr.length)];
   }
 
+  // --- Permissions ---
+  async function requestUnsplashPermissions() {
+    if (typeof chrome === 'undefined' || !chrome.permissions) return true;
+    return new Promise(r => {
+      chrome.permissions.request({
+        origins: ['https://api.unsplash.com/*', 'https://images.unsplash.com/*'],
+      }, r);
+    });
+  }
+
+  async function hasUnsplashPermissions() {
+    if (typeof chrome === 'undefined' || !chrome.permissions) return true;
+    return new Promise(r => {
+      chrome.permissions.contains({
+        origins: ['https://api.unsplash.com/*', 'https://images.unsplash.com/*'],
+      }, r);
+    });
+  }
+
   // --- Background ---
   async function loadBackground(prefs) {
     const credit = document.getElementById('photo-credit');
@@ -95,6 +114,12 @@
       document.body.style.backgroundColor = '#2c2c2c';
       document.body.style.backgroundImage = 'none';
       if (credit) credit.style.display = 'none';
+      return;
+    }
+
+    const hasPerms = await hasUnsplashPermissions();
+    if (!hasPerms) {
+      console.warn('Unsplash permissions not granted');
       return;
     }
 
@@ -207,7 +232,12 @@
   keyInput.addEventListener('input', () => {
     clearTimeout(keyDebounce);
     keyDebounce = setTimeout(async () => {
-      prefs.unsplashKey = keyInput.value.trim();
+      const key = keyInput.value.trim();
+      if (key && key !== prefs.unsplashKey) {
+        const granted = await requestUnsplashPermissions();
+        if (!granted) return;
+      }
+      prefs.unsplashKey = key;
       // Clear cache so a new image is fetched with the new key
       prefs.cachedBg = null;
       prefs.cachedBgTime = 0;
